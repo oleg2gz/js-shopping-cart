@@ -1,0 +1,78 @@
+﻿Простейший Webpack
+
+Шаг 1.
+В папке проекта создаём структуру файлов:
+dist
+  \css
+  \js
+  index.html
+src
+  \modules
+    \one.js
+    \two.js
+  index.js
+.gitignore
+
+У папок нет расширений (символов после точки).
+В файл .gitignore (точка впереди) вставляем:
+/node_modules
+package-lock.json
+
+Шаг 2.
+В консоли запускаем:
+npm init -y
+Рядом с файлом .gitignore появится файл package.json.
+Открываем, находим там строчку "scripts": { и заменяем внутри объекта одну строчку, начинающуюся с "test" на новые три строчки:
+"scripts": {
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development",
+    "start": "webpack serve --mode=development --open"
+},
+
+Чуть ниже находим строчку "license": "ISC", и добавляем после неё (запятую не забываем), чтобы получилось так:
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.7.4"
+  }
+
+Шаг 3.
+Создаём файл webpack.config.js со следующим содержанием:
+
+const path = require('path')
+
+module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  entry: {
+    main: './index.js',
+  },
+  output: {
+    filename: './js/[name].js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  devServer: {
+    hot: true,
+    static: {
+      directory: './dist',
+      watch: true,
+    },
+  },
+}
+
+Шаг 4
+Запускаем npm i
+
+В первый раз при открытии проекта надо прежде всего запустить один раз npm run build, чтобы создать наш файл скрипта.
+
+Потом надо подключить его в index.html
+<script src="./js/main.js" defer></script>
+
+Запускаем `npm start` и открываем браузер кликом по ссылке в терминале с зажатым Ctrl:
+`http://localhost:8080/`
+
+Теперь у нас есть следующие варианты работы:
+
+npm start - то, в чём мы обычно работаем.
+npm run watch  - вариант первого, но пока не используем.
+npm run build - сборка проекта, запускаем после остановки тех что выше (сочетанием клавиш Ctrl + C) перед отправкой на Гитхаб. 

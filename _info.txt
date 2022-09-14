@@ -1,0 +1,32 @@
+﻿TODO:
+- some buttons are links - prevent default behaviour in handlers!!!
+- add messages for adding item to the cart (about 2 seconds);
+- somehow show that this item is in the basket already (appearing messages or text on the disabled buttons?);
+- send the order to the fake API, clean the data and show "thank you" message;
+- add loading message when "fetching the data";
+- find free svg icons and delete unneeded external css & js links;
+- tweak shopping cart HTML/CSS responsive markup;
+
+Twick with favicon:
+<link rel="icon" href="data:," />
+
+
+При вычислениях переводи всё в копейки, а потом опять дели на 100 и получай рубли:
+
+const cartTotal =
+  cart.reduce((acc, item) => acc + (item.price * 100 * item.qty) / 100, 0)
+
+
+Для округления результата используй toFixed(2), а потом при необходимости переводи в число + или parseFloat().
+
+Вероятно, всё таки стоит добавить поле ввода для количества - товар разный может быть, а может быть это оптовая закупка и нужно не по-штучно, а сразу какое-то число вводить.
+
+Оставлять по умолчанию 1 штуку товара - удалять полностью только по кнопке "Удалить". На кнопку уменьшения и на поле ввода поставить заглушку, чтобы невозможно было ввести меньше 1 штуки:
+
+const changeQty = (e, action) => {
+  const input = e.target
+  action === 'plus' ? input.value++ : input.value--
+  if (isNaN(input.value) || input.value <= 0) {
+    input.value = 1
+  }
+}

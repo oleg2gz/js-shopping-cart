@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="data:," />
+    <link
+      href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script src="./js/cart.js" defer></script>
+    <title>Shopping Cart</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="overlay"></div>
+      <nav>
+        <h2>SHOP</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li class="cart">
+            <a href="cart.html">
+              <ion-icon name="basket"></ion-icon>Cart<span data-cart-qty
+                >0</span
+              >
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="products-container">
+      <div class="product-header">
+        <h5 class="product-title">PRODUCT</h5>
+        <h5 class="price">PRICE</h5>
+        <h5 class="quantity">QUANTITY</h5>
+        <h5 class="total">TOTAL</h5>
+      </div>
+
+      <div class="products" data-cart-list></div>
+
+      <div class="basketTotalContainer">
+        <h4 class="basketTotalTitle">Basket Total</h4>
+        <h4 class="basketTotal" data-cart-total>$0.00</h4>
+      </div>
+    </div>
+    <!-- /.products-container -->
+  </body>
+</html>
